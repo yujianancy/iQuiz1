@@ -59,11 +59,26 @@ var science = subject(title: "Science", description: "Test whether you're a real
 var maths = subject(title: "Mathematics", description: "Test whether you're a real maths maniac!", imageName: "maths", questions: [qma1,qma2,qma3])
 
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, , SSRadioButtonControllerDelegate {
+    
+    @IBOutlet weak var button1: UIButton!
+    @IBOutlet weak var button2: UIButton!
+    @IBOutlet weak var button3: UIButton!
+    
+    var radioButtonController: SSRadioButtonsController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        radioButtonController = SSRadioButtonsController(buttons: button1, button2, button3)
+        radioButtonController!.delegate = self
+        radioButtonController!.shouldLetDeSelect = true
+        
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    func didSelectButton(aButton: UIButton?) {
+        print(aButton)
     }
     
     override func didReceiveMemoryWarning() {
