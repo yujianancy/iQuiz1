@@ -13,7 +13,8 @@
 		8C38AF4B1BE96AFC0021E558 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C38AF4A1BE96AFC0021E558 /* Images.xcassets */; };
 		8C38AF4E1BE96AFC0021E558 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C38AF4C1BE96AFC0021E558 /* LaunchScreen.xib */; };
 		8C38AF5A1BE96AFC0021E558 /* iQuiz1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C38AF591BE96AFC0021E558 /* iQuiz1Tests.swift */; };
-		9D9141E41BED6E8800FD99CD /* SSRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9141E31BED6E8800FD99CD /* SSRadioButton.swift */; };
+		9DAB81041BEED1F700BE1232 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAB81031BEED1F700BE1232 /* QuestionViewController.swift */; };
+		9DAB81061BEED24E00BE1232 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAB81051BEED24E00BE1232 /* Assets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +38,8 @@
 		8C38AF531BE96AFC0021E558 /* iQuiz1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iQuiz1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C38AF581BE96AFC0021E558 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C38AF591BE96AFC0021E558 /* iQuiz1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iQuiz1Tests.swift; sourceTree = "<group>"; };
-		9D9141E31BED6E8800FD99CD /* SSRadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSRadioButton.swift; sourceTree = "<group>"; };
+		9DAB81031BEED1F700BE1232 /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		9DAB81051BEED24E00BE1232 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,12 +82,13 @@
 			isa = PBXGroup;
 			children = (
 				8C38AF431BE96AFC0021E558 /* AppDelegate.swift */,
+				9DAB81051BEED24E00BE1232 /* Assets.swift */,
 				8C38AF451BE96AFC0021E558 /* ViewController.swift */,
+				9DAB81031BEED1F700BE1232 /* QuestionViewController.swift */,
 				8C38AF471BE96AFC0021E558 /* Main.storyboard */,
 				8C38AF4A1BE96AFC0021E558 /* Images.xcassets */,
 				8C38AF4C1BE96AFC0021E558 /* LaunchScreen.xib */,
 				8C38AF411BE96AFC0021E558 /* Supporting Files */,
-				9D9141E31BED6E8800FD99CD /* SSRadioButton.swift */,
 			);
 			path = iQuiz1;
 			sourceTree = "<group>";
@@ -219,7 +222,8 @@
 			files = (
 				8C38AF461BE96AFC0021E558 /* ViewController.swift in Sources */,
 				8C38AF441BE96AFC0021E558 /* AppDelegate.swift in Sources */,
-				9D9141E41BED6E8800FD99CD /* SSRadioButton.swift in Sources */,
+				9DAB81061BEED24E00BE1232 /* Assets.swift in Sources */,
+				9DAB81041BEED1F700BE1232 /* QuestionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
