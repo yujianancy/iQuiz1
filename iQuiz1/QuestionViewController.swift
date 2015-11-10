@@ -32,57 +32,6 @@ class QuestionViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     @IBAction func clickNext(sender: AnyObject) {
         
-        //if (isEnd){
-            
-           // self.performSegueWithIdentifier("back", sender: self)
-       // }
-        
-        /*if (isQues){
-            
-            curIndex = curIndex + 1
-            
-            if (curIndex <= subjects[sub].questions.count - 1){
-                
-                curQues = subjects[sub].questions[curIndex]
-                
-                quesTxt.numberOfLines = 0
-                
-                quesTxt.text = curQues.text
-                
-                correctAns.text = ""
-                
-                record.text = ""
-                
-                options.hidden = false
-                
-                options.delegate = self
-                
-                options.dataSource = self
-                
-            } else{
-                
-                if (ansCorrect == subjects[sub].questions.count){
-                    
-                    quesTxt.text = "Perfect!"
-                    
-                } else{
-                    
-                    quesTxt.text = "Almost!"
-                    
-                }
-                
-                quesTxt.font = UIFont(name: (quesTxt.font?.fontName)!, size: 30)
-                
-                correctAns.text = "That's all in this subject. Try another subject!"
-                
-                button.setTitle("Back", forState: .Normal)
-                
-                isEnd = true
-                
-            }
-
-        } else{*/
-        
         if (optionSelected == nil){
             
             optionSelected = 0
@@ -96,8 +45,6 @@ class QuestionViewController: UIViewController, UIPickerViewDataSource, UIPicker
         }
         
         self.performSegueWithIdentifier("showAns", sender: self)
-        
-        
         
     }
     
@@ -121,6 +68,18 @@ class QuestionViewController: UIViewController, UIPickerViewDataSource, UIPicker
         }
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if (self.isMovingFromParentViewController()){
+            
+            curIndex = curIndex - 1
+            
+            print(curIndex)
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -134,7 +93,56 @@ class QuestionViewController: UIViewController, UIPickerViewDataSource, UIPicker
         
         options.dataSource = self
         
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
+        
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
+        
+        self.view.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
+        
+        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
+        
+        self.view.addGestureRecognizer(swipeRight)
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func respondToSwipeGesture(gesture:UIGestureRecognizer){
+        
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer{
+            
+            switch swipeGesture.direction{
+                
+            case UISwipeGestureRecognizerDirection.Left:
+                
+                if (optionSelected == nil){
+                    
+                    optionSelected = 0
+                    
+                }
+                
+                if (optionSelected == curQues.answer){
+                    
+                    ansCorrect = ansCorrect + 1
+                    
+                }
+                
+                self.performSegueWithIdentifier("showAns", sender: self)
+                
+            case UISwipeGestureRecognizerDirection.Right:
+                
+                curIndex = curIndex - 1
+                
+                print(curIndex)
+                
+                navigationController?.popViewControllerAnimated(true)
+                
+            default:
+                
+                break
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

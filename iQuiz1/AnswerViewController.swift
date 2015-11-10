@@ -13,17 +13,25 @@ class AnswerViewController: UIViewController {
     @IBOutlet weak var yansTxt: UILabel!
     
     @IBOutlet weak var corAns: UILabel!
+    
     @IBOutlet weak var record: UILabel!
     
     @IBOutlet weak var button: UIButton!
+    
     var yans:String!
+    
     var optionSelected:Int!
+    
     var ansCorrect:Int!
+    
     var curQues:question!
+    
     var sub:Int!
+    
     var curIndex:Int!
     
     var isEnd:Bool = false
+    
     @IBAction func clickNext(sender: AnyObject) {
         
         if (isEnd){
@@ -60,7 +68,62 @@ class AnswerViewController: UIViewController {
         }
     }
     
+    func respondToSwipeGesture(gesture:UIGestureRecognizer){
+        
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer{
+            
+            switch swipeGesture.direction{
+                
+            case UISwipeGestureRecognizerDirection.Left:
+                
+                if (isEnd){
+                    
+                    self.performSegueWithIdentifier("back", sender: self)
+                    
+                }
+                
+                curIndex = curIndex + 1
+                
+                if (curIndex <= subjects[sub].questions.count - 1){
+                    
+                    performSegueWithIdentifier("backToQues", sender: self)
+                    
+                } else{
+                    
+                    if (ansCorrect == subjects[sub].questions.count){
+                        
+                        yansTxt.text = "Perfect!"
+                        
+                    } else{
+                        
+                        yansTxt.text = "Almost!"
+                        
+                    }
+                    
+                    yansTxt.font = UIFont(name: (yansTxt.font?.fontName)!, size: 30)
+                    
+                    corAns.text = "That's all in this subject. Try another subject!"
+                    
+                    button.setTitle("Back", forState: .Normal)
+                    
+                    isEnd = true
+                }
+
+                
+            case UISwipeGestureRecognizerDirection.Right:
+                
+                navigationController?.popViewControllerAnimated(true)
+                
+            default:
+                
+                break
+            }
+        }
+    }
+
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
         if (segue.identifier == "backToQues"){
             
             let svc = segue.destinationViewController as! QuestionViewController
@@ -73,6 +136,7 @@ class AnswerViewController: UIViewController {
         }
     }
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         yansTxt.text = "Your answer is " + curQues.optionTxt[optionSelected]
@@ -80,12 +144,26 @@ class AnswerViewController: UIViewController {
         corAns.text = "The correct answer is " + curQues.optionTxt[curQues.answer]
         
         record.text = "You've got " + String(ansCorrect) + " out of " + String(subjects[sub].questions.count) + " right!"
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
+        
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
+        
+        self.view.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
+        
+        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
+        
+        self.view.addGestureRecognizer(swipeRight)
 
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
+        
         // Dispose of any resources that can be recreated.
     }
     
