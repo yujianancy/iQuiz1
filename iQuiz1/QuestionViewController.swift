@@ -16,7 +16,7 @@ class QuestionViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     @IBOutlet weak var record: UILabel!
     
-    @IBOutlet weak var button: UIButton!
+   // @IBOutlet weak var button: UIButton!
     
     @IBOutlet weak var correctAns: UILabel!
     
@@ -26,24 +26,18 @@ class QuestionViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     var curIndex:Int = 0
     
-    var isQues:Bool = true
-    
     var optionSelected:Int!
     
     var ansCorrect:Int = 0
     
-    var isEnd:Bool = false
-    
     @IBAction func clickNext(sender: AnyObject) {
         
-        isQues = !isQues
-        
-        if (isEnd){
+        //if (isEnd){
             
-            self.performSegueWithIdentifier("back", sender: self)
-        }
+           // self.performSegueWithIdentifier("back", sender: self)
+       // }
         
-        if (isQues){
+        /*if (isQues){
             
             curIndex = curIndex + 1
             
@@ -87,31 +81,46 @@ class QuestionViewController: UIViewController, UIPickerViewDataSource, UIPicker
                 
             }
 
-        } else{
+        } else{*/
+        
+        if (optionSelected == nil){
             
-            if (optionSelected == nil){
-                
-                optionSelected = 0
-                
-            }
+            optionSelected = 0
             
-            if (optionSelected == curQues.answer){
-                
-                ansCorrect = ansCorrect + 1
-                
-            }
-            
-            quesTxt.text = "Your answer is " + curQues.optionTxt[optionSelected]
-            
-            correctAns.text = "The correct answer is " + curQues.optionTxt[curQues.answer]
-            
-            record.text = "You've got " + String(ansCorrect) + " out of " + String(subjects[sub].questions.count) + " right!"
-            
-            options.hidden = true
         }
+            
+        if (optionSelected == curQues.answer){
+                
+            ansCorrect = ansCorrect + 1
+                
+        }
+        
+        self.performSegueWithIdentifier("showAns", sender: self)
+        
         
         
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if (segue.identifier == "showAns"){
+            
+            let svc = segue.destinationViewController as! AnswerViewController
+            
+            svc.yans = curQues.optionTxt[curQues.answer]
+            
+            svc.curQues = curQues
+            
+            svc.optionSelected = optionSelected
+            
+            svc.ansCorrect = ansCorrect
+            
+            svc.sub = sub
+            
+            svc.curIndex = curIndex
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -151,6 +160,7 @@ class QuestionViewController: UIViewController, UIPickerViewDataSource, UIPicker
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         optionSelected = row
+        
     }
 
     /*
