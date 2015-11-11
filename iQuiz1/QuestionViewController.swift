@@ -16,7 +16,11 @@ class QuestionViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     @IBOutlet weak var record: UILabel!
     
-   // @IBOutlet weak var button: UIButton!
+    @IBAction func clickBack(sender: AnyObject) {
+        
+        self.performSegueWithIdentifier("backToMain", sender: self)
+        
+    }
     
     @IBOutlet weak var correctAns: UILabel!
     
@@ -64,10 +68,9 @@ class QuestionViewController: UIViewController, UIPickerViewDataSource, UIPicker
             
             svc.sub = sub
             
-            print("Real",curIndex)
-            
             svc.curIndex = curIndex
         }
+
     }
     
    
@@ -124,9 +127,7 @@ class QuestionViewController: UIViewController, UIPickerViewDataSource, UIPicker
                 
             case UISwipeGestureRecognizerDirection.Right:
                 
-                curIndex = curIndex - 1
-                
-                navigationController?.popViewControllerAnimated(true)
+                self.performSegueWithIdentifier("backToMain", sender: self)
                 
             default:
                 
@@ -134,18 +135,6 @@ class QuestionViewController: UIViewController, UIPickerViewDataSource, UIPicker
             }
         }
     }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if (self.isMovingFromParentViewController()){
-            
-            curIndex = curIndex - 1
-
-        }
-        
-    }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

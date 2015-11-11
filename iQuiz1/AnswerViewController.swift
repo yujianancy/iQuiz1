@@ -32,6 +32,11 @@ class AnswerViewController: UIViewController {
     
     var isEnd:Bool = false
     
+    @IBAction func clickBack(sender: AnyObject) {
+        
+        self.performSegueWithIdentifier("back", sender: self)
+        
+    }
     @IBAction func clickNext(sender: AnyObject) {
         
         if (isEnd){
@@ -120,9 +125,7 @@ class AnswerViewController: UIViewController {
                 
             case UISwipeGestureRecognizerDirection.Right:
                 
-                curIndex = curIndex - 1
-                
-                navigationController?.popViewControllerAnimated(true)
+                self.performSegueWithIdentifier("back", sender: self)
                 
             default:
                 
@@ -130,19 +133,6 @@ class AnswerViewController: UIViewController {
             }
         }
     }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if (self.isMovingFromParentViewController()){
-            
-            curIndex = curIndex - 1
-            
-            print(curIndex)
-        }
-        
-    }
-
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         

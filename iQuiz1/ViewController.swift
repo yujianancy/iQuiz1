@@ -10,7 +10,8 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
-    @IBOutlet var newTableView: UITableView!
+
+    @IBOutlet weak var newTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,7 +36,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         setAlert.addAction(defaultAction)
         
         self.presentViewController(setAlert, animated: true, completion: nil)
+        
     }
+
+
     
     func tableView(tableView: UITableView, numberOfRowsInSection section:Int) -> Int{
         return subjects.count
