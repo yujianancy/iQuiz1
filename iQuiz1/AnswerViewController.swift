@@ -42,6 +42,8 @@ class AnswerViewController: UIViewController {
         
         curIndex = curIndex + 1
         
+        print(curIndex)
+        
         if (curIndex <= subjects[sub].questions.count - 1){
             
             performSegueWithIdentifier("backToQues", sender: self)
@@ -68,6 +70,8 @@ class AnswerViewController: UIViewController {
         }
     }
     
+    
+    
     func respondToSwipeGesture(gesture:UIGestureRecognizer){
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer{
@@ -82,7 +86,11 @@ class AnswerViewController: UIViewController {
                     
                 }
                 
+                print(curIndex)
+                
                 curIndex = curIndex + 1
+                
+                print(curIndex)
                 
                 if (curIndex <= subjects[sub].questions.count - 1){
                     
@@ -112,6 +120,8 @@ class AnswerViewController: UIViewController {
                 
             case UISwipeGestureRecognizerDirection.Right:
                 
+                curIndex = curIndex - 1
+                
                 navigationController?.popViewControllerAnimated(true)
                 
             default:
@@ -119,6 +129,18 @@ class AnswerViewController: UIViewController {
                 break
             }
         }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if (self.isMovingFromParentViewController()){
+            
+            curIndex = curIndex - 1
+            
+            print(curIndex)
+        }
+        
     }
 
     
@@ -138,6 +160,8 @@ class AnswerViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        print(curIndex)
         
         yansTxt.text = "Your answer is " + curQues.optionTxt[optionSelected]
         

@@ -64,21 +64,13 @@ class QuestionViewController: UIViewController, UIPickerViewDataSource, UIPicker
             
             svc.sub = sub
             
+            print("Real",curIndex)
+            
             svc.curIndex = curIndex
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if (self.isMovingFromParentViewController()){
-            
-            curIndex = curIndex - 1
-            
-            print(curIndex)
-        }
-        
-    }
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,8 +126,6 @@ class QuestionViewController: UIViewController, UIPickerViewDataSource, UIPicker
                 
                 curIndex = curIndex - 1
                 
-                print(curIndex)
-                
                 navigationController?.popViewControllerAnimated(true)
                 
             default:
@@ -144,6 +134,18 @@ class QuestionViewController: UIViewController, UIPickerViewDataSource, UIPicker
             }
         }
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if (self.isMovingFromParentViewController()){
+            
+            curIndex = curIndex - 1
+
+        }
+        
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
