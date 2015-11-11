@@ -101,7 +101,7 @@
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j3M-qb-2g5">
                                 <rect key="frame" x="144" y="495" width="87" height="38"/>
-                                <state key="normal" title="Next"/>
+                                <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="clickNext:" destination="fQD-1c-Jrx" eventType="touchUpInside" id="kN8-43-LCf"/>
                                 </connections>
